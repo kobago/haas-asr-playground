@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Haas Playground</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>Haas Playground</h1>
+      <span id="info" class="info">接続中…</span>
+      <label class="model-pick">モデル
+        <select id="model"></select>
+      </label>
+    </div>
+    <nav>
+      <a href="#live" data-tab="live">リアルタイム字幕</a>
+      <a href="#record" data-tab="record">録音して認識</a>
+      <a href="#file" data-tab="file">ファイル</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- リアルタイム: マイク音声を WebSocket で流し、0.25 秒ごとに読み直した結果を表示 -->
+    <section id="tab-live" class="tab">
+      <div class="controls">
+        <button id="live-btn" class="primary"><span class="dot"></span><span id="live-label">マイクで話す</span></button>
+        <button id="live-clear" class="ghost">クリア</button>
+      </div>
+      <canvas id="live-meter" class="meter"></canvas>
+      <div class="stats">
+        <div><span id="live-delay">–</span><small>遅延 ms（中央値）</small></div>
+        <div><span id="live-model">–</span><small>モデル処理 ms</small></div>
+        <div><span id="live-time">0:00</span><small>録音時間</small></div>
+      </div>
+      <div id="live-out" class="transcript"><p class="empty">話すとここに文字起こしが表示されます。0.7 秒黙ると確定します。</p></div>
+    </section>
+
+    <!-- 録音してから一括で認識: POST /api/transcribe -->
+    <section id="tab-record" class="tab" hidden>
+      <div class="controls">
+        <button id="rec-btn" class="primary"><span class="dot"></span><span id="rec-label">録音開始</span></button>
+        <span id="rec-time" class="clock">0:00</span>
+        <label class="compare"><input type="checkbox" id="rec-compare"> 全モデルで比較</label>
+      </div>
+      <canvas id="rec-meter" class="meter"></canvas>
+      <audio id="rec-audio" controls hidden></audio>
+      <div id="rec-stats" class="stats" hidden></div>
+      <div id="rec-out" class="transcript"><p class="empty">録音を止めると、まとめて文字起こしします。</p></div>
+    </section>
+
+    <!-- ファイルアップロード: POST /api/transcribe -->
+    <section id="tab-file" class="tab" hidden>
+      <label id="drop" class="drop">
+        <input id="file-input" type="file" accept="audio/*,video/*">
+        <strong>音声・動画ファイルを選択</strong>
+        <span>またはここにドロップ（WAV / MP3 / M4A / WebM など、300 MB まで）</span>
+      </label>
+      <label class="compare"><input type="checkbox" id="file-compare"> 全モデルで比較</label>
+      <div id="file-stats" class="stats" hidden></div>
+      <div id="file-out" class="transcript"><p class="empty">ファイルを選ぶと文字起こしします。</p></div>
+    </section>
+
+    <p id="status" class="status" hidden></p>
+  </main>
+
+  <script type="module" src="/static/app.js"></script>
+</body>
+</html>
