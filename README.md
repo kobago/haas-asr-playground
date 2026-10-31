@@ -115,3 +115,11 @@ python3 bench/summarize.py results
 - 評価データ: 0.7 GB
 - ONNX 版: 2.9 GB
 - Hugging Face のキャッシュ(モデル): 別途
+
+## ライセンス
+
+- **コードとドキュメント**: [Apache License 2.0](LICENSE)。Copyright 2026 kobago
+- **`app/static/capture-worklet.js`**: [Haas-ASR](https://github.com/third-intelligence/Haas-ASR) の `demos/static/capture-worklet.js` をそのまま使っている(Apache License 2.0)。
+- **`results/hyp/`**: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)。
+  - 正解文(`ref`)は、評価用コーパスの書き起こしに [asr-ja-bench](https://huggingface.co/datasets/third-intelligence/asr-ja-bench) の修正を当てたもの。
+  - 元のコーパスのライセンスを引き継いでいる。詳しくは [results/README.md](results/README.md) を参照。

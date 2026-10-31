@@ -24,8 +24,19 @@
 | `peak_rss_MiB` | プロセスの RAM のピーク。GPU の評価では読み込んだ音声も含む |
 | `rss_after_load_MiB` | ONNX 版: モデルをロードした直後の RAM |
 
-`hyp/` の `ref` は、元のコーパスの書き起こしに asr-ja-bench の修正を当てたもの。それぞれのライセンスは次のとおり。
+## ライセンス
 
-- JSUT: CC BY-SA 4.0(高道慎之介ほか)
-- JVNV: CC BY-SA 4.0(Detai Xin ほか)
-- FLEURS: CC BY 4.0(Google)
+`hyp/` のファイルは [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) で公開する。
+
+`ref` は、元のコーパスの書き起こしに [asr-ja-bench](https://huggingface.co/datasets/third-intelligence/asr-ja-bench) の修正を当てたもの。
+JSUT と JVNV が CC BY-SA 4.0 なので、それを引き継いで `hyp/` 全体を CC BY-SA 4.0 とした。
+
+| コーパス | ライセンス | 作者 |
+|---|---|---|
+| [JSUT](https://sites.google.com/site/shinnosuketakamichi/publication/jsut) ver1.1(basic5000) | CC BY-SA 4.0 | 園部良介、高道慎之介、猿渡洋 |
+| [JVNV](https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus) ver1 | CC BY-SA 4.0 | Detai Xin、Junfeng Jiang、高道慎之介、Yuki Saito、Akiko Aizawa、猿渡洋 |
+| [FLEURS](https://huggingface.co/datasets/google/fleurs)(ja_jp test) | CC BY 4.0 | Alexis Conneau ほか(Google) |
+
+`hyp`(認識結果)は、各モデルの出力をそのまま記録したもの。
+
+それ以外の結果ファイル(`*.jsonl` の計測値)は、リポジトリのほかの部分と同じ Apache License 2.0 とする。
